@@ -17,7 +17,7 @@ confirm("Start game?");
 // Story Intro
 alert("You wake up in a dark room.");
 if (!yn("You see a mysterious device on the floor. Pick it up?")) {
-    dmg(120, "", "You don't pick it up. You're starting to feel hungry. You go back to sleep, never to wake up /n /n ---GAME OVER---");
+    dmg(120, "", "You don't pick it up. You're starting to feel hungry. You go back to sleep, never to wake up. \n \n ---GAME OVER---");
 }
 
 
