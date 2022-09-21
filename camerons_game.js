@@ -1,4 +1,5 @@
 //Setup
+var answer;
 var p = {};
 p.health = 12;
 p.inventory = [];
@@ -17,9 +18,13 @@ confirm("Start game?");
 // Story Intro
 alert("You wake up in a dark room.");
 if (!yn("You see a mysterious device on the floor. Pick it up?")) {
-    dmg(120, "", "You don't pick it up. You're starting to feel hungry. You go back to sleep, never to wake up. \n \n ---GAME OVER---");
+    dmg(12, "", "You don't pick it up. You're starting to feel hungry. You go back to sleep, never to wake up. \n \n ----GAME OVER----");
 }
-
+alert("As soon as you pick it up, doors open on both sides of you.");
+answer = prompt("Which one do you go through? (left/right/neither)");
+if (answer.trim().toLowerCase() = "left") {
+    alert("You start");
+}
 
 
 
@@ -29,9 +34,9 @@ if (!yn("You see a mysterious device on the floor. Pick it up?")) {
 
 //--------Functions-----------------------------------------------------------------------------------------
 function yn(text) {
-    let answer = prompt(`${text} (y/n)`)
-    answer = answer.trim();
-    return answer == "y" || answer == "Y";
+    answer = prompt(`${text} (y/n)`).trim().toLowerCase();
+    if(answer == )
+    return answer == "y";
 }
 function dmg(amt, enemy, message) {
     p.health -= amt;
@@ -41,7 +46,7 @@ function dmg(amt, enemy, message) {
         if (p.health > 0) {
             alert(`You took ${amt} damage from ${enemy.name} with ${enemy.weapon}. You now have ${p.health} health.`);
         } else {
-            alert(`You took ${amt} damage from ${enemy.name} with ${enemy.weapon}. You are now dead.`);
+            alert(`You took ${amt} damage from ${enemy.name} with ${enemy.weapon}. You are now dead. \n \n ----GAME OVER----`);
         };
     }
 }
