@@ -27,19 +27,19 @@ function story() {
     }
     alert("As soon as you pick it up, doors open on both sides of you.");
     answer = prompt("Which one do you go through? (left/right/neither)");
-    alert(answer);/*
-    if (trimTxt(answer) = "left") {
-        alert("you went left");//this doesnt run
-        //p.pos = "left1";
-        //killPlayer("You start to turn to the left, but as soon as you stand up, a gust of wind knocks you over, and you fall off of the endless cliff behind you. ");
-        //return ""
-    } } else {
-        if (trimTxt(answer) = "right") {
+    alert(answer);
+    if (trimTxt(answer) == "left") {
+        alert("you went left");
+        p.pos = "left1";
+        killPlayer("You start to turn to the left, but as soon as you stand up, a gust of wind knocks you over, and you fall off of the endless cliff behind you. ");
+        return ""
+    }  else {
+        if (trimTxt(answer) == "right") {
             p.pos = "right1";
             killPlayer("You stand up, and immediately, you trip and fall off the ledge behind you. ");
             return ""
         } else {
-            if (trimTxt(answer) = "neither") {
+            if (trimTxt(answer) == "neither") {
                 alert("You stay where you are, and you feel a gust of wind above you. Thankfully, nothing happens.");
             } else {
                 
@@ -47,16 +47,16 @@ function story() {
         }
     }
     answer = prompt("Now where do you go? (left/right/neither)");
-    if (trimTxt(answer) = "left") {
+    if (trimTxt(answer) == "left") {
         p.pos = "left1";
         alert("You turn to the left and start walking.");
     } else {
-        if (trimTxt(answer) = "right") {
+        if (trimTxt(answer) == "right") {
             p.pos = "right1";
             alert("You stand up and start walking right.");
             //:) looks better in monospace
         } else {
-            if (trimTxt(answer) = "neither") {
+            if (trimTxt(answer) == "neither") {
                 alert("You keep sitting, and you hear a crack above you.");
                 killPlayer("A boulder falls from above, and you have no time to move before you are dead. ");
                 return ""
@@ -66,9 +66,9 @@ function story() {
         }
     }
     if (yn("You eventually see a pedestal with a slot for your device. Do you insert it?")) {
-        if (p.pos = "left1") {
+        if (p.pos == "left1") {
             alert("You insert it, and a door opens up ahead, shining light through.");
-        } if (p.pos = "right1") {
+        } if (p.pos == "right1") {
             killPlayer("A dark shadow reaches out, and crushes the device. You feel immense pain, and then black out. ");
         }
     } else {
@@ -79,7 +79,7 @@ function story() {
         getItem("armor", 0, 1);
     }
 
-}*/}
+}
 //--------Functions-----------------------------------------------------------------------------------------
 function yn(text) {
     answer = prompt(`${text} (y/n)`).trim().toLowerCase();
