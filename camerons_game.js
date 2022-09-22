@@ -49,15 +49,19 @@ if (answer.trim().toLowerCase() = "left") {
     return ""}
 if(yn("You eventually see a pedestal with a slot for your device. Do you insert it?")) {
     if(p.pos = "left1") {
-        ""
-    } if(p.pos = "right1") {}
+        alert("You insert it, and a door opens up ahead, shining light through.");
+    } if(p.pos = "right1") {
+        dmg(12, "", "A dark shadow reaches out, and crushes the device. You feel immense pain, and then black out. \n \n ----GAME OVER----");
+    }
 } else {
     dmg(12, "", "The tunnels seem to sense your hesitation, and begin to crumble. You get trapped underneath a boulder, unable to breathe. \n \n ----GAME OVER----");
     return ""
 }
+if(yn("You see a wooden box. Open it?")){
+    getItem();
+}
 
-
-
+}
 //--------Functions-----------------------------------------------------------------------------------------
 function yn(text) {
     answer = prompt(`${text} (y/n)`).trim().toLowerCase();
@@ -84,4 +88,7 @@ function weaponData(name, atk) {
 }
 function armorData(name, def) {
     return {"name": name, "def": def}
+}
+function getItem(itemInd, itemCount) {
+    p.inventory;
 }
