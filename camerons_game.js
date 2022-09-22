@@ -14,7 +14,7 @@ var items = [itemData("an apple", "Food", 2)];
 alert("A CAM0studios production");
 alert("Together with DrSmashsenstien");
 alert("We present:");
-alert("[name tbd]");
+alert("The Dungeons\n (name WIP)");
 confirm("Start game?");
 
 // Story Intro
@@ -23,6 +23,7 @@ function story() {
     alert("You wake up in a dark room.");
     if (!yn("You see a mysterious device on the floor. Pick it up?")) {
         killPlayer("You don't pick it up. You're starting to feel hungry. You go back to sleep, never to wake up. ");
+        return ""
     }
     alert("As soon as you pick it up, doors open on both sides of you.");
     answer = prompt("Which one do you go through? (left/right/neither)");
@@ -30,7 +31,7 @@ function story() {
         p.pos = "left1";
         killPlayer("You start to turn to the left, but as soon as you stand up, a gust of wind knocks you over, and you fall off of the endless cliff behind you. ");
         return ""
-    } else {
+    } }/*else {
         if (trimTxt(answer) = "right") {
             p.pos = "right1";
             killPlayer("You stand up, and immediately, you trip and fall off the ledge behind you. ");
@@ -76,7 +77,7 @@ function story() {
         getItem("armor", 0, 1);
     }
 
-}
+}*/
 //--------Functions-----------------------------------------------------------------------------------------
 function yn(text) {
     answer = prompt(`${text} (y/n)`).trim().toLowerCase();
