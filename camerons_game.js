@@ -22,40 +22,40 @@ story();
 function story() {
 alert("You wake up in a dark room.");
 if (!yn("You see a mysterious device on the floor. Pick it up?")) {
-    dmg(12, "", "You don't pick it up. You're starting to feel hungry. You go back to sleep, never to wake up. \n \n ----GAME OVER----");
+    killPlayer("You don't pick it up. You're starting to feel hungry. You go back to sleep, never to wake up. ");
 }
 alert("As soon as you pick it up, doors open on both sides of you.");
 answer = prompt("Which one do you go through? (left/right/neither)");
-if (answer.trim().toLowerCase() = "left") {
+if (trimTxt(answer) = "left") {
     p.pos = "left1";
-    dmg(12, "", "You start to turn to the left, but as soon as you stand up, a gust of wind knocks you over, and you fall off of the endless cliff behind you. \n \n ----GAME OVER----");
+    killPlayer("You start to turn to the left, but as soon as you stand up, a gust of wind knocks you over, and you fall off of the endless cliff behind you. ");
     return ""
-} if (answer.trim().toLowerCase() = "right") {
+} if (trimTxt(answer) = "right") {
     p.pos = "right1";
-    dmg(12, "", "You stand up, and immediately, you trip and fall off the ledge behind you. \n \n ----GAME OVER----");
+    killPlayer("You stand up, and immediately, you trip and fall off the ledge behind you. ");
     return ""
-} if (answer.trim().toLowerCase() = "neither") {
+} if (trimTxt(answer) = "neither") {
     alert("You stay where you are, and you feel a gust of wind above you. Thankfully, nothing happens.");
 }
 answer = prompt("Now where do you go? (left/right/neither)");
-if (answer.trim().toLowerCase() = "left") {
+if (trimTxt(answer) = "left") {
     p.pos = "left1";
     alert("You turn to the left and start walking.");
-} if (answer.trim().toLowerCase() = "right") {
+} if (trimTxt(answer) = "right") {
     p.pos = "right1";
     alert("You stand up and start walking right.");
-} if (answer.trim().toLowerCase() = "neither") {
+} if (trimTxt(answer) = "neither") {
     alert("You keep sitting, and you hear a crack above you.");
-    dmg(12, "", "A boulder fally from above, and you have no time to move before you are dead. \n \n ----GAME OVER----");
+    killPlayer("A boulder fally from above, and you have no time to move before you are dead. ");
     return ""}
 if(yn("You eventually see a pedestal with a slot for your device. Do you insert it?")) {
     if(p.pos = "left1") {
         alert("You insert it, and a door opens up ahead, shining light through.");
     } if(p.pos = "right1") {
-        dmg(12, "", "A dark shadow reaches out, and crushes the device. You feel immense pain, and then black out. \n \n ----GAME OVER----");
+        killPlayer("A dark shadow reaches out, and crushes the device. You feel immense pain, and then black out. ");
     }
 } else {
-    dmg(12, "", "The tunnels seem to sense your hesitation, and begin to crumble. You get trapped underneath a boulder, unable to breathe. \n \n ----GAME OVER----");
+    killPlayer("The tunnels seem to sense your hesitation, and begin to crumble. You get trapped underneath a boulder, unable to breathe.");
     return ""
 }
 if(yn("You see a wooden box. Open it?")){
@@ -72,12 +72,16 @@ function yn(text) {
 function dmg(amt, enemy, message) {
     p.health -= amt;
     if(message){
-        alert(message);
+        if(p.health > 0) {
+            alert(message);
+        } else {
+            killPlayer(message);
+        }
     } else{
         if (p.health > 0) {
             alert(`You took ${amt} damage from ${enemy.name} with ${enemy.weapon}. You now have ${p.health} health.`);
         } else {
-            alert(`You took ${amt} damage from ${enemy.name} with ${enemy.weapon}. You are now dead. \n \n ----GAME OVER----`);
+            killPlayer(`You took ${amt} damage from ${enemy.name} with ${enemy.weapon}. You are now dead.`);
         };
     }
 }
@@ -107,4 +111,9 @@ function getItem(itemType, itemInd, itemCount) {
 }
 function trimTxt(text) {
     return text.trim().toLowerCase();
+}
+function killPlayer(message) {
+    p.health = 0;
+    alert(`${message} \n \n ----GAME OVER----`);
+    return ""
 }
