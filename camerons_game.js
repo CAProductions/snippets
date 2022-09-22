@@ -28,9 +28,10 @@ function story() {
     alert("As soon as you pick it up, doors open on both sides of you.");
     answer = prompt("Which one do you go through? (left/right/neither)");
     if (trimTxt(answer) = "left") {
-        p.pos = "left1";
-        killPlayer("You start to turn to the left, but as soon as you stand up, a gust of wind knocks you over, and you fall off of the endless cliff behind you. ");
-        return ""
+        alert("you went left");
+        //p.pos = "left1";
+        //killPlayer("You start to turn to the left, but as soon as you stand up, a gust of wind knocks you over, and you fall off of the endless cliff behind you. ");
+        //return ""
     } }/*else {
         if (trimTxt(answer) = "right") {
             p.pos = "right1";
