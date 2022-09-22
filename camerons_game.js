@@ -6,8 +6,9 @@ p.inventory = [];
 p.weapon = 0;
 p.armor = 0;
 p.pos = "start";
-var weapons = [weaponData("the explosion", 120), weaponData("a tree branch", 1)]
-var armor = [armorData("", 0), armorData("some old clothes", 1)];
+var weapons = [weaponData("a tree branch", 1)]
+var armor = [armorData("some old clothes", 1)];
+var items = [itemData("an apple", "Food", 2)];
 
 // Intro
 alert("A CAM0studios production");
@@ -58,7 +59,7 @@ if(yn("You eventually see a pedestal with a slot for your device. Do you insert 
     return ""
 }
 if(yn("You see a wooden box. Open it?")){
-    getItem();
+    getItem("armor", 0, 1);
 }
 
 }
@@ -80,7 +81,7 @@ function dmg(amt, enemy, message) {
         };
     }
 }
-function enemydata(name, weaponInd, armorInd) {
+function enemyData(name, weaponInd, armorInd) {
     return {"name": name, "weapon": weapons[weaponInd], "armor": armor[armorInd]}
 }
 function weaponData(name, atk) {
@@ -89,6 +90,21 @@ function weaponData(name, atk) {
 function armorData(name, def) {
     return {"name": name, "def": def}
 }
-function getItem(itemInd, itemCount) {
-    p.inventory;
+function itemData(name, type, stat) {
+    return {"name": name, "type": type, "stat": stat}
+}
+function getItem(itemType, itemInd, itemCount) {
+    if(type == "weapon") {
+        p.inventory += weaponData(weapons[itemInd].name, weapons[itemInd].atk);
+    }
+    if(type == "armor") {
+        p.inventory += armorData(armor[itemInd].name, armor[itemInd].def);
+    }
+    if(type == "item") {
+        p.inventory += itemData(items[itemInd].name, items[itemInd].stat);
+    }
+    alert(`You picked up ${items[itemInd].name}! It has ${items[itemInd].stat} ${items[itemInd].type}`);
+}
+function trimTxt(text) {
+    return text.trim().toLowerCase();
 }
