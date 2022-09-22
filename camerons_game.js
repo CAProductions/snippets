@@ -79,7 +79,7 @@ function story() {
         getItem("armor", 0, 1);
     }
 
-}*/
+}*/}
 //--------Functions-----------------------------------------------------------------------------------------
 function yn(text) {
     answer = prompt(`${text} (y/n)`).trim().toLowerCase();
