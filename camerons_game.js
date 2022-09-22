@@ -46,7 +46,7 @@ if (trimTxt(answer) = "left") {
     alert("You stand up and start walking right.");
 } if (trimTxt(answer) = "neither") {
     alert("You keep sitting, and you hear a crack above you.");
-    killPlayer("A boulder fally from above, and you have no time to move before you are dead. ");
+    killPlayer("A boulder falls from above, and you have no time to move before you are dead. ");
     return ""}
 if(yn("You eventually see a pedestal with a slot for your device. Do you insert it?")) {
     if(p.pos = "left1") {
