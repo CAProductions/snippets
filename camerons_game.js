@@ -120,11 +120,11 @@ function itemData(name, type, stat) {
     return { "name": name, "type": type, "stat": stat }
 }
 function getWeaponOrArmor(itemType, itemInd) {
-    if (type == "weapon") {
+    if (itemType == "weapon") {
         p.inventory += weaponData(weapons[itemInd].name, weapons[itemInd].atk);
         alert(`You picked up ${weapons[itemInd].name}! It has ${weapons[itemInd].atk} atk.`);
     }
-    if (type == "armor") {
+    if (itemType == "armor") {
         p.inventory += armorData(armor[itemInd].name, armor[itemInd].def);
         alert(`You picked up ${armor[itemInd].name}! It has ${armor[itemInd].def} def.`);
     }/*
