@@ -26,12 +26,18 @@ story();}
 //Story Point Functions
 function story() {
     introStory();
-    
-
+    mainStory1();
 }
 function mainStory1() {
     if (yn("You see a wooden box. Open it?")) {
         getWeaponOrArmor("armor", 0);
+    } else {
+        alert("You just keep walking.");
+    }
+    if (yn("You walk outside and trip on a tree branch. Do you pick it up?")) {
+        getWeaponOrArmor("weapon", 0);
+    } else {
+        alert("You decide to keep on going.");
     }
 }
 function introStory() {
