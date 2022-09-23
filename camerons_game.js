@@ -127,10 +127,7 @@ function getWeaponOrArmor(type, ind) {
     if (type == "armor") {
         p.inventory.push(armorData(armor[ind].name, armor[ind].def));
         alert(`You picked up ${armor[ind].name}! It has ${armor[ind].def} def.`);
-    }/*
-    if (type == "item") {
-        p.inventory += itemData(items[itemInd].name, items[itemInd].stat);
-    }*/
+    }
 }
 function getItem(type, amt) {
     if (type == "heal") {
