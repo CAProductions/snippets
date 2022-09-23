@@ -97,7 +97,7 @@ function dmg(amt, enemy, message) {
         if (p.health > 0) {
             alert(message);
         } else {
-            killPlayer(message);
+            killPlayer(`${message} \n \n ----GAME OVER----`);
         }
     } else {
         if (p.health > 0) {
@@ -119,19 +119,32 @@ function armorData(name, def) {
 function itemData(name, type, stat) {
     return { "name": name, "type": type, "stat": stat }
 }
-function getWeaponOrArmor(itemType, itemInd) {
-    if (itemType == "weapon") {
-        p.inventory += weaponData(weapons[itemInd].name, weapons[itemInd].atk);
-        alert(`You picked up ${weapons[itemInd].name}! It has ${weapons[itemInd].atk} atk.`);
+function getWeaponOrArmor(type, ind) {
+    if (type == "weapon") {
+        p.inventory.push(weaponData(weapons[ind].name, weapons[ind].atk));
+        alert(`You picked up ${weapons[ind].name}! It has ${weapons[ind].atk} atk.`);
     }
-    if (itemType == "armor") {
-        p.inventory += armorData(armor[itemInd].name, armor[itemInd].def);
-        alert(`You picked up ${armor[itemInd].name}! It has ${armor[itemInd].def} def.`);
+    if (type == "armor") {
+        p.inventory.push(armorData(armor[ind].name, armor[ind].def));
+        alert(`You picked up ${armor[ind].name}! It has ${armor[ind].def} def.`);
     }/*
     if (type == "item") {
         p.inventory += itemData(items[itemInd].name, items[itemInd].stat);
     }*/
-    alert(`You picked up ${items[itemInd].name}! It has ${items[itemInd].stat} ${items[itemInd].type}`);
+}
+function getItem(type, amt) {
+    if (type == "heal") {
+        p.heals += amt;
+        alert(`You picked up ${amt} heals! you now have ${p.heals} heals.`);
+    }
+    if (type == "atk") {
+        p.atkFood += amt;
+        alert(`You picked up ${amt} atk food! you now have ${p.atkFood} atk food.`);
+    }
+    if (type == "def") {
+        p.defFood += amt;
+        alert(`You picked up ${amt} def food! you now have ${p.defFood} def food.`);
+    }
 }
 function trimTxt(text) {
     return text.trim().toLowerCase();
