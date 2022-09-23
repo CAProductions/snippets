@@ -7,8 +7,9 @@ p.weapon = 0;
 p.armor = 0;
 p.pos = "start";
 p.ded = false;
-var weapons = [weaponData("a tree branch", 1)]
-var armor = [armorData("some old clothes", 1)];
+var weapons = [weaponData("Tree branch", 1)]
+var armor = [armorData("Old clothes", 1)];
+var enemies = [enemyData("Red Bokoblin", 1, null)]
 p.heals = 2;
 p.atkFood = 0;
 p.defFood = 0;
@@ -39,6 +40,8 @@ function mainStory1() {
     } else {
         alert("You decide to keep on going.");
     }
+    alert("You hear a rustle in the trees...");
+    battleEnemy(0);
 }
 function introStory() {
 
@@ -123,7 +126,7 @@ function dmg(amt, enemy, message) {
     }
 }
 function enemyData(name, weaponInd, armorInd) {
-    return { "name": name, "weapon": weapons[weaponInd], "armor": armor[armorInd] }
+    return { "name": name, "weapon": weaponInd>=0 ? weapons[weaponInd] : null, "armor": armorInd>=0 ? armor[armorInd] : null}
 }
 function weaponData(name, atk) {
     return { "name": name, "atk": atk }
@@ -165,4 +168,7 @@ function killPlayer(message) {
     p.health = 0;
     alert(`${message} \n \n ----GAME OVER----`);
     return ""
+}
+function battleEnemy(enemy, canRun) {
+    return true;
 }
