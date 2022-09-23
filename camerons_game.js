@@ -17,7 +17,7 @@ p.defFood = 0;
 alert("A CAM0studios production");
 alert("Together with DrSmashsenstien");
 alert("We present:");
-alert("The Dungeons\n (name WIP)");
+alert("The ☠Dungeons☠\n (name WIP)");
 if(confirm("Start game?")){
 
 // Story Intro
