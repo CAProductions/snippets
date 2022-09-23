@@ -3,8 +3,8 @@ var answer;
 var p = {};
 p.health = 12;
 p.inventory = [];
-p.weapon = 0;
-p.armor = 0;
+p.weapon = null;
+p.armor = null;
 p.pos = "start";
 p.ded = false;
 var weapons = [weaponData("Tree branch", 1), weaponData("Boko Club", 2)]
@@ -26,10 +26,8 @@ if(confirm("Start game?")){
 story();}
 //Story Point Functions
 function story() {
-    //introStory(); //commented out for quick testing
-    if (p.ded) {return ""}
-        mainStory1();if(p.ded)
-        mainStory2();
+    //introStory();if (p.ded) {return ""}     //commented out for quick testing
+    mainStory1();if(p.ded){return ""}
 }
 function mainStory1() {
     if (yn("You see a wooden box. Open it?")) {
@@ -145,10 +143,12 @@ function itemData(name, type, stat) {
 function getWeaponOrArmor(type, ind) {
     if (type == "weapon") {
         p.inventory.push(weaponData(weapons[ind].name, weapons[ind].atk));
+        if(weapons[ind].atk > weapons[p.weapon].atk){p.weapon = ind;}
         alert(`You picked up ${weapons[ind].name}! It has ${weapons[ind].atk} atk.`);
     }
     if (type == "armor") {
         p.inventory.push(armorData(armor[ind].name, armor[ind].def));
+        if(armor[ind].def > armor[p.armor].def){p.armor = ind;}
         alert(`You picked up ${armor[ind].name}! It has ${armor[ind].def} def.`);
     }
 }
@@ -179,7 +179,7 @@ function battleEnemy(enemy, canRun) {
     alert(`
     BATTLE! \n 
     You: \n
-    hp: ${p.hp}
+    hp: ${p.health}
     atk: ${p.weapon ? weapons[p.weapon].atk : 0} (${p.weapon ? weapons[p.weapon].name : "no weapon"})
     def: ${p.armor ? armor[p.armor].def : 0} (${p.armor ? armor[p.armor].name : "no armor"})
     inv: ${p.heals} heals, ${p.atkFood} atk food, ${p.defFood} def food
