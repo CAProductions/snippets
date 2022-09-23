@@ -17,7 +17,8 @@ p.defFood = 0;
 alert("A CAM0studios production");
 alert("Together with DrSmashsenstien");
 alert("We present:");
-alert("The ☠Dungeons☠\n (name WIP)");
+alert("The Dungeons\n (name WIP)");
+alert("An E-Girl aproches you")
 if(confirm("Start game?")){
 
 // Story Intro
@@ -78,7 +79,7 @@ function story() {
         return ""
     }
     if (yn("You see a wooden box. Open it?")) {
-        getItem("armor", 0);
+        getWeaponOrArmor("armor", 0);
     }
 
 }
