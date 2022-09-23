@@ -7,10 +7,10 @@ p.weapon = 0;
 p.armor = 0;
 p.pos = "start";
 p.ded = false;
-var weapons = [weaponData("Tree branch", 1)]
+var weapons = [weaponData("Tree branch", 1), weaponData("Boko Club", 2)]
 var armor = [armorData("Old clothes", 1)];
-var enemies = [enemyData("Red Bokoblin", 1, null)]
-p.heals = 2;
+var enemies = [enemyData("Red Bokoblin", 1, null, 6, )]
+p.heals = 3;
 p.atkFood = 0;
 p.defFood = 0;
 
@@ -19,14 +19,14 @@ p.defFood = 0;
 alert("A CAM0studios production");
 alert("Together with DrSmashsenstien");
 alert("We present:");
-alert("The Dungeons\n (name WIP)");
+alert("The Dungeons of Myliar: Ruins of Nakkar");
 if(confirm("Start game?")){
 
 //Run Story
 story();}
 //Story Point Functions
 function story() {
-    introStory();
+    //introStory(); //commented out for quick testing
     mainStory1();
 }
 function mainStory1() {
@@ -104,7 +104,9 @@ function introStory() {
 function yn(text) {
     answer = prompt(`${text} (y/n)`).trim().toLowerCase();
     if (answer == "") { confirm("Leave game?"); } else {
-        if (answer != "y" || answer != "n") {
+        if (answer != "y" && answer != "n") {
+            return yn(`Please enter a valid answer: \n ${text}`);
+        } else {
             return answer == "y";
         }
     }
@@ -125,8 +127,8 @@ function dmg(amt, enemy, message) {
         };
     }
 }
-function enemyData(name, weaponInd, armorInd) {
-    return { "name": name, "weapon": weaponInd>=0 ? weapons[weaponInd] : null, "armor": armorInd>=0 ? armor[armorInd] : null}
+function enemyData(name, weaponInd, armorInd, hp, xp) {
+    return { "name": name, "weapon": weaponInd>=0 ? weapons[weaponInd] : null, "armor": armorInd>=0 ? armor[armorInd] : null, "hp": hp, "xp": xp}
 }
 function weaponData(name, atk) {
     return { "name": name, "atk": atk }
