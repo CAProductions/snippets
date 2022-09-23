@@ -18,7 +18,6 @@ alert("A CAM0studios production");
 alert("Together with DrSmashsenstien");
 alert("We present:");
 alert("The Dungeons\n (name WIP)");
-alert("An E-Girl aproches you")
 if(confirm("Start game?")){
 
 // Story Intro
@@ -123,13 +122,15 @@ function itemData(name, type, stat) {
 function getWeaponOrArmor(itemType, itemInd) {
     if (type == "weapon") {
         p.inventory += weaponData(weapons[itemInd].name, weapons[itemInd].atk);
+        alert(`You picked up ${weapons[itemInd].name}! It has ${weapons[itemInd].atk} atk.`);
     }
     if (type == "armor") {
         p.inventory += armorData(armor[itemInd].name, armor[itemInd].def);
-    }
+        alert(`You picked up ${armor[itemInd].name}! It has ${armor[itemInd].def} def.`);
+    }/*
     if (type == "item") {
         p.inventory += itemData(items[itemInd].name, items[itemInd].stat);
-    }
+    }*/
     alert(`You picked up ${items[itemInd].name}! It has ${items[itemInd].stat} ${items[itemInd].type}`);
 }
 function trimTxt(text) {
