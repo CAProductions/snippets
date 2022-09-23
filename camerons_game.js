@@ -6,6 +6,7 @@ p.inventory = [];
 p.weapon = 0;
 p.armor = 0;
 p.pos = "start";
+p.ded = false;
 var weapons = [weaponData("a tree branch", 1)]
 var armor = [armorData("some old clothes", 1)];
 p.heals = 2;
@@ -20,9 +21,21 @@ alert("We present:");
 alert("The Dungeons\n (name WIP)");
 if(confirm("Start game?")){
 
-// Story Intro
+//Run Story
 story();}
+//Story Point Functions
 function story() {
+    introStory();
+    
+
+}
+function mainStory1() {
+    if (yn("You see a wooden box. Open it?")) {
+        getWeaponOrArmor("armor", 0);
+    }
+}
+function introStory() {
+
     alert("You wake up in a dark room.");
     if (!yn("You see a mysterious device on the floor. Pick it up?")) {
         killPlayer("You don't pick it up. You're starting to feel hungry. You go back to sleep, never to wake up. ");
@@ -77,10 +90,6 @@ function story() {
         killPlayer("The tunnels seem to sense your hesitation, and begin to crumble. You get trapped underneath a boulder, unable to breathe.");
         return ""
     }
-    if (yn("You see a wooden box. Open it?")) {
-        getWeaponOrArmor("armor", 0);
-    }
-
 }
 //--------Functions-----------------------------------------------------------------------------------------
 function yn(text) {
