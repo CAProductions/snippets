@@ -8,17 +8,20 @@ p.armor = 0;
 p.pos = "start";
 var weapons = [weaponData("a tree branch", 1)]
 var armor = [armorData("some old clothes", 1)];
-var items = [itemData("an apple", "Food", 2)];
+p.heals = 2;
+p.atkFood = 0;
+p.defFood = 0;
+
 
 // Intro
 alert("A CAM0studios production");
 alert("Together with DrSmashsenstien");
 alert("We present:");
 alert("The Dungeons\n (name WIP)");
-confirm("Start game?");
+if(confirm("Start game?")){
 
 // Story Intro
-story();
+story();}
 function story() {
     alert("You wake up in a dark room.");
     if (!yn("You see a mysterious device on the floor. Pick it up?")) {
@@ -27,9 +30,7 @@ function story() {
     }
     alert("As soon as you pick it up, doors open on both sides of you.");
     answer = prompt("Which one do you go through? (left/right/neither)");
-    alert(answer);
     if (trimTxt(answer) == "left") {
-        alert("you went left");
         p.pos = "left1";
         killPlayer("You start to turn to the left, but as soon as you stand up, a gust of wind knocks you over, and you fall off of the endless cliff behind you. ");
         return ""
@@ -42,7 +43,7 @@ function story() {
             if (trimTxt(answer) == "neither") {
                 alert("You stay where you are, and you feel a gust of wind above you. Thankfully, nothing happens.");
             } else {
-                
+                return ""
             }
         }
     }
@@ -61,7 +62,7 @@ function story() {
                 killPlayer("A boulder falls from above, and you have no time to move before you are dead. ");
                 return ""
             } else {
-                
+                return ""
             }
         }
     }
@@ -70,13 +71,14 @@ function story() {
             alert("You insert it, and a door opens up ahead, shining light through.");
         } if (p.pos == "right1") {
             killPlayer("A dark shadow reaches out, and crushes the device. You feel immense pain, and then black out. ");
+            return ""
         }
     } else {
         killPlayer("The tunnels seem to sense your hesitation, and begin to crumble. You get trapped underneath a boulder, unable to breathe.");
         return ""
     }
     if (yn("You see a wooden box. Open it?")) {
-        getItem("armor", 0, 1);
+        getItem("armor", 0);
     }
 
 }
@@ -117,7 +119,7 @@ function armorData(name, def) {
 function itemData(name, type, stat) {
     return { "name": name, "type": type, "stat": stat }
 }
-function getItem(itemType, itemInd, itemCount) {
+function getWeaponOrArmor(itemType, itemInd) {
     if (type == "weapon") {
         p.inventory += weaponData(weapons[itemInd].name, weapons[itemInd].atk);
     }
