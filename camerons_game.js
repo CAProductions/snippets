@@ -27,7 +27,9 @@ story();}
 //Story Point Functions
 function story() {
     //introStory(); //commented out for quick testing
-    mainStory1();
+    if (p.ded) {return ""}
+        mainStory1();if(p.ded)
+        mainStory2();
 }
 function mainStory1() {
     if (yn("You see a wooden box. Open it?")) {
@@ -42,6 +44,7 @@ function mainStory1() {
     }
     alert("You hear a rustle in the trees...");
     battleEnemy(0);
+    if(p.ded){ return ""}
 }
 function introStory() {
 
@@ -168,9 +171,29 @@ function trimTxt(text) {
 }
 function killPlayer(message) {
     p.health = 0;
+    p.ded = true;
     alert(`${message} \n \n ----GAME OVER----`);
     return ""
 }
 function battleEnemy(enemy, canRun) {
-    return true;
+    alert(`
+    BATTLE! \n 
+    You: \n
+    hp: ${p.hp}
+    atk: ${p.weapon ? weapons[p.weapon].atk : 0} (${p.weapon ? weapons[p.weapon].name : "no weapon"})
+    def: ${p.armor ? armor[p.armor].def : 0} (${p.armor ? armor[p.armor].name : "no armor"})
+    inv: ${p.heals} heals, ${p.atkFood} atk food, ${p.defFood} def food
+    ${enemy.name}: \n
+    hp: ${enemy.hp} \n
+    atk: ${enemy.weapon?weapons[enemy.weapon].atk:0}
+    def: ${enemy.armor?armor[enemy.armor].def:0}
+    `);
+
+    killPlayer(`You were killed by a(n) ${enemy.name}.`);//lose
+    return false;//return lose
+
+    return true;//return win
+}
+function calcDmg(dmg, def) {
+    return dmg / (def+1);
 }
