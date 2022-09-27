@@ -176,23 +176,40 @@ function killPlayer(message) {
     return ""
 }
 function battleEnemy(enemy, canRun) {
+    p.atk = p.weapon ? weapons[p.weapon].atk : 0;
+    p.def = p.armor ? armor[p.armor].def : 0;
+    enemy.atk = enemies[enemy].weapon ? weapons[enemies[enemy].weapon].atk : 0;
+    enemy.def = enemies[enemy].armor ? armor[enemies[enemy].armor].def : 0;
+    enemy.health = enemies[enemy].hp;
+    enemy.name = enemies[enemy].name;
     alert(`
     BATTLE! \n 
     You: \n
     hp: ${p.health}
-    atk: ${p.weapon ? weapons[p.weapon].atk : 0} (${p.weapon ? weapons[p.weapon].name : "no weapon"})
-    def: ${p.armor ? armor[p.armor].def : 0} (${p.armor ? armor[p.armor].name : "no armor"})
+    atk: ${p.atk} (${p.weapon ? weapons[p.weapon].name : "no weapon"})
+    def: ${p.def} (${p.armor ? armor[p.armor].name : "no armor"})
     inv: ${p.heals} heals, ${p.atkFood} atk food, ${p.defFood} def food
     ${enemy.name}: \n
     hp: ${enemy.hp} \n
-    atk: ${enemy.weapon?weapons[enemy.weapon].atk:0}
-    def: ${enemy.armor?armor[enemy.armor].def:0}
+    atk: ${enemy.atk}
+    def: ${enemy.def}
     `);
-
-    killPlayer(`You were killed by a(n) ${enemy.name}.`);//lose
-    return false;//return lose
-
-    return true;//return win
+    do {
+        dmg(calcDmg(enemy.atk, p.def), "", `The ${enemy.name} attacks, doing ${calcDmg()} damage. You are now at ${p.health} hp.`);
+        //
+        answer = prompt("What do you do: (atk, heal, eat, run, inv)");
+        if (answer == "atk") {
+        enemy.hp -= calcDmg(p.atk, enemy.def);
+        alert(`You did ${calcDmg(p.atk, enemy.def)} damage to the ${enemy.name}.`);}
+        if (answer == "heal") {
+            p.hp += 4;
+            p.heals -= 1;
+        }
+        killPlayer(`You were killed by a(n) ${enemy.name}.`);//lose
+        return false;//return lose
+        //
+        return true;//return win
+    } while (true);
 }
 function calcDmg(dmg, def) {
     return dmg / (def+1);
