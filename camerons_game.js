@@ -19,7 +19,7 @@ p.defFood = 0;
 alert("A CAM0studios production");
 alert("Together with DrSmashsenstien");
 alert("We present:");
-alert("The Dungeons of Myliar: Ruins of Nakkar");
+alert("The Dungeons of Myliar");
 if(confirm("Start game?")){
 
 //Run Story
