@@ -22,7 +22,7 @@ function battle(ename, ehp, eatck, exp, canrun) {
     //setup fight
     alert(`A ${ename} has attacked!`);
     alert(`BATTLE!\nLoadout:\nWeapon: ${p.atck_n} | Attack: ${p.atck}\nArmor: ${p.def_n} | Defense: ${p.def}\nHeals: ${heals}`);
-    alert(`Items\nBombs: ${getListItemByIndex(inv, "bomb")}\nAttack Potions: ${getListItemByIndex(inv, "atck_pot")}\nDef Potions: ${getListItemByIndex(inv, "def_pot")}`);
+    //alert(`Items\nBombs: ${getListItemByIndex(inv, "bomb")}\nAttack Potions: ${getListItemByIndex(inv, "atck_pot")}\nDef Potions: ${getListItemByIndex(inv, "def_pot")}`);
     alert(`Enemy: ${ename} \nHP: ${ehp}\nAttack: ${eatck}`);
     exp *= ehp;
     do {
@@ -89,7 +89,9 @@ function battle(ename, ehp, eatck, exp, canrun) {
     } while (ehp > 0);
     if (exp > 0) {
         p.xp += exp;
-        alert(`${p.name} Defeated: ${ename} and earned ${exp} xp!`);
+        p.rupees += Math.ceil(exp/4);
+        alert(`${p.name} Defeated: ${ename}!`);
+        alert(`${p.name}  earned ${exp} xp, and ${Math.ceil(exp/4)}`)
     } else {
         alert(`${p.name} got away safely!`);
     };
@@ -116,7 +118,7 @@ function drop(pname, power, ptype) {
     };
     */
     if (ptype == "food") {
-        p.inv.push()
+        p.inv.push({"name" : pname, "power" : power})
     };
 };
 function quote(name, text) {
@@ -154,6 +156,7 @@ p.def_n = "none";
 p.hp = 12;
 p.xp = 0;
 p.inv = []
+p.rupees = 0;
 heals = 5;
 var ded = false;
 alert('DrSmashsenstien is proud to presest');
@@ -229,6 +232,7 @@ function game() {
     if (q(`Should ${p.name} this mysterious Sheikah Slate?`)) {
         alert(`${p.name} picks up the mysterious device, and the door to the room starts unlocking.`);
         alert(`${p.name} walks out the door but all they see is another room with boxes and a place to put in there Sheikah slate. They slot in their Sheikah slate`);
+        quote('???', "You have been asleep for the past 10,000 years.")
         alert(`The door leads ${p.name} into a final room and they can see sunlight in the distance`);
         if (q( p.name + " finds a chest, open it?")) {
             drop("Rugged Armor", 1, "armor");
@@ -276,26 +280,33 @@ function game() {
         alert(`After clearing the group of enemys ${p.name} finds a small structure with a place to insert their Sheikah Slate.`);
         alert(p.name + " inserts their Sheikah Slate and the structure starts rising into a great tower.");
         alert("-- GREAT TOWER --");
-        quote('???', `${p.name}... ${p.name}... ${p.name}, this is the great tower. over there you can see Hyrule Castle.`)
-        quote('???', "My Name is Princess Zelda.")
-        quote('Zelda', "I have been in there for the past 1000 years, fighting Ganon.")
-        quote('Zelda', "Go find Impa in Kakariko Village.")
-        quote('Zelda', "She will help you find and destroy Ganon")
-        quote('Zelda', `${p.name}, ... The fate of Hyrule rests within your hands.`)
+        quote('???', `${p.name}... ${p.name}... ${p.name}, this is the great tower. over there you can see Hyrule Castle.`);
+        quote('???', "My Name is Princess Zelda.");
+        quote('Zelda', "I have been in there for the past 1000 years, fighting Ganon.");
+        quote('Zelda', "Go find Impa in Kakariko Village.");
+        quote('Zelda', "She will help you find and destroy Ganon");
+        quote('Zelda', `${p.name}, ... The fate of Hyrule rests within your hands.`);
         alert(`An old man aproches ${p.name}`);
-        alert("''you might want to find your way off of this great tower. I have a deal for you, you defeat this lynel over there that has been bothering me and i will give you this paraglider.''");
+        quote('Old Man', "Oh... Hello there");
+        quote('Old Man', "What brings you here?");
+        alert(`${p.name} explains to the man that they just woke up and don't know what happening.`);
+        quote('Old Man', "Did you... by any chance here a voice?");
+        alert(`${p.name} explains that they heard a voice and says it is from "Princess Zelda"`);
+        quote('Old Man', "Ahhh. now i understand... in that case, you might want to make your way off of this plateu");
+        alert(`${p.name} shakes their head in agreement`)
+        quote('Old Man', "I have a deal for you, you defeat this lynel over there that has been bothering me and i will give you this paraglider.")
         var c5 = prompt("Take the old mans deal and defeat the lynel (1) or try to steal the paraglider form him (2)");
         if (c5 == "1") {
-            alert("You walk over to the lynel and engage in battle")
-            battle("Red Lynel", 45, 3, 2.5, 0)
+            alert("You walk over to the lynel and engage in battle");
+            battle("Red Lynel", 45, 3, 2.5, 0);
             if (ded) {
                 return "";
             }
-            drop("Lynel Sword", 5, "weapon")
-            alert('The old man calls you over to join him')
-            alert(`''Aha! I see that you have taken that Lynels weapon, you could use that to protect yourself''`)
-            alert(`''Here, you deserve this paraglider.''`)
-            alert(`''I will watch over you, take good care of yourself''`)
+            drop("Lynel Sword", 5, "weapon");
+            alert('The old man calls you over to join him');
+            alert(`''Aha! I see that you have taken that Lynels weapon, you could use that to protect yourself''`);
+            alert(`''Here, you deserve this paraglider.''`);
+            alert(`''I will watch over you, take good care of yourself''`);
         }
         if (c5 == "2") {
             alert("You attempt to steal the paraglider from the man")
