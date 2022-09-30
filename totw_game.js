@@ -2,15 +2,6 @@ var p, action, heals, rdm, ded;
 p = {};
 //functions
 function randomNum(min, max) {
-    if (!min || !max) {
-        console.error("Use a valid min and max for random num.");
-        return undefined;
-    };
-    // Failsafe
-    if (min >= max) {
-        console.error("make sure min is not higher than max");
-        return undefined;
-    };
     var number = Math.floor(Math.random() * max);
     if (number < min) {
         number = randomNum(min, max);
@@ -38,7 +29,7 @@ function battle(ename, ehp, eatck, exp, canrun) {
             alert(`GAME OVER...`);
             return "";
         };
-        alert(`${ename} attacks doing ${edmg} damage, leaving ${p.name} with ${p.hp} HP`);
+        alert(`${ename} attacks you, doing ${edmg} damage, leaving you with ${p.hp} HP`);
         /*Player Attacks*/
         var action = "placeholderbeliek";
         action = prompt("what action to do? (fight/heal/item/run)");
@@ -46,17 +37,17 @@ function battle(ename, ehp, eatck, exp, canrun) {
         if (action == "fight" || action == "f") {
             if (randomNum(1, 10) == 4) {
                 ehp = ehp - p.atck * 3;
-                alert(`CRITIAL HIT!\n${p.name} attacks doing ${p.atck * 3} damage, leaving the ${ename} with ${ehp} HP`);
+                alert(`CRITIAL HIT!\nYou attack doing ${p.atck * 3} damage, leaving the ${ename} with ${ehp} HP`);
             } else {
                 ehp = ehp - p.atck;
-                alert(`${p.name} attacks doing ${p.atck} damage, leaving the ${ename} with ${ehp} HP`);
+                alert(`You attack doing ${p.atck} damage, leaving the ${ename} with ${ehp} HP`);
             };
         };
         /*if (action == "item" || action == "i") {
             var itemprompt = prompt(`What item should you use? (bomb/atck_pot/def_pot)`);
             if (itemprompt == "bomb" || itemprompt == "b") {
                 ehp = ehp - 12;
-                alert(`BOOM!\n${p.name} uses a bomb on the ${ename} doing 12 damage and leaving it with ${ehp} HP`);
+                alert(`BOOM!\nyou uses a bomb on the ${ename} doing 12 damage and leaving it with ${ehp} HP`);
             };
             if (itemprompt == "atck_pot" || itemprompt == "a") {
 
@@ -70,10 +61,10 @@ function battle(ename, ehp, eatck, exp, canrun) {
                 let rdm = randomNum(4, 6);
                 p.hp = p.hp + rdm;
                 heals = heals - 1;
-                alert(`${p.name} used a heal and restored ${rdm} HP, now they have: ${p.hp}HP`);
-                alert(`${p.name} has ${heals} heals remaining`);
+                alert(`You used a heal and restored ${rdm} HP, now they have: ${p.hp}HP`);
+                alert(`You has ${heals} heals remaining`);
             } else {
-                alert(`${p.name} attempted to use a heal but didnt have any`);
+                alert(`You attempted to use a heal but didnt have any`);
             };
         };
         */
@@ -83,29 +74,29 @@ function battle(ename, ehp, eatck, exp, canrun) {
                 exp = 0;
             };
             if (canrun == 0) {
-                alert(p.name + " can't run away from this battle!");
+                alert("You can't run away from this battle!");
             };
         };
     } while (ehp > 0);
     if (exp > 0) {
         p.xp += exp;
-        p.rupees += Math.ceil(exp/4);
-        alert(`${p.name} Defeated: ${ename}!`);
-        alert(`${p.name}  earned ${exp} xp, and ${Math.ceil(exp/4)}`)
+        p.rupees += Math.ceil(exp / 4);
+        alert(`You defeated: ${ename}!`);
+        alert(`You  earned ${exp} xp, and ${Math.ceil(exp / 4)} rupees!`)
     } else {
-        alert(`${p.name} got away safely!`);
+        alert(`You got away safely!`);
     };
     //End Fight
     return ("won");
 };
 function drop(pname, power, ptype) {
     if (ptype == "armor") {
-        alert(`${p.name} picked up, ${pname}!\n ${power} Defense!`);
+        alert(`You picked up, ${pname}!\n ${power} Defense!`);
         p.def = power;
         p.def_n = pname;
     };
     if (ptype == "weapon") {
-        alert(`${p.name} picked up, ${pname}!\n ${power} Attack!`);
+        alert(`You picked up, ${pname}!\n ${power} Attack!`);
         p.atck = power;
         p.atck_n = pname;
     };
@@ -118,11 +109,11 @@ function drop(pname, power, ptype) {
     };
     */
     if (ptype == "food") {
-        p.inv.push({"name" : pname, "power" : power})
+        p.inv.push({ "name": pname, "power": power })
     };
 };
 function quote(name, text) {
-alert(`${name}:\n  ''${text}''`)
+    alert(`${name}:\n  ''${text}''`)
 }
 function changeListByIndex(list, indexOf, n) {
     list[list.indexOf(indexOf) + 1] = list[list.indexOf(indexOf) + 1] + n;
@@ -184,8 +175,12 @@ V2.00
 ----
 V2.50
  - Complete overhaul of the inventory system, removed heals and items, replaced with meals
+ - Made the game third person
+----
+V2.75
+ - Made the game first person again
 */
-var version = 'V 2.50';
+var version = 'V 2.75';
 alert(`Welcome, to the Legend of Zelda, Text of the wild!\n${version}`);
 
 /*
@@ -224,23 +219,23 @@ game();
 //start game
 //game is a function so that we can end it with a report when the player runs out of hp and dies
 function game() {
-    p.name = prompt("What is our hero's name?");
-    alert(`${p.name} awakes to find themself sleeping in a water bed inside of a dimly lit cavern`);
+    p.name = prompt("What is your name?");
+    alert(`you awake to find yourself sleeping in a water bed inside of a dimly lit cavern`);
     quote('???', `${p.name}, ${p.name}...`);
     quote('???', `Wake up, ${p.name}, the world needs you.`)
     quote('???', `Take this, It is a Sheikah Slate, It will guide you after your long slumber`)
-    if (q(`Should ${p.name} this mysterious Sheikah Slate?`)) {
-        alert(`${p.name} picks up the mysterious device, and the door to the room starts unlocking.`);
-        alert(`${p.name} walks out the door but all they see is another room with boxes and a place to put in there Sheikah slate. They slot in their Sheikah slate`);
+    if (q(`Should you this mysterious Sheikah Slate?`)) {
+        alert(`You pick up the mysterious device, and the door to the room starts unlocking.`);
+        alert(`You walk out the door but all you see is another room with boxes and a place to put in your Sheikah slate. You slot in Your Sheikah slate`);
         quote('???', "You have been asleep for the past 10,000 years.")
-        alert(`The door leads ${p.name} into a final room and they can see sunlight in the distance`);
-        if (q( p.name + " finds a chest, open it?")) {
+        alert(`The door leads you into a final room and you can see sunlight in the distance`);
+        if (q("You find a chest, open it?")) {
             drop("Rugged Armor", 1, "armor");
             drop("heal", 2, "heal");
         }
 
-        alert(p.name + " walks outside and the brightness of the sun blinds them");
-        if (q( p.name + " trips on a stick and get back up. do they grab the stick?")) {
+        alert("You walk outside and the brightness of the sun blinds you");
+        if (q("You trip on a stick and get back up. Grab the stick?")) {
             drop("Tree Branch", 1, "weapon");
         }
         battle("Bokoblin", 6, 2, 0.5, 1);
@@ -248,12 +243,12 @@ function game() {
             return "";
         };
         drop("heal", 5, "heal");
-        alert(p.name + " walks forward and hears the mysterious voice again.");
+        alert("You walk forward and hear the mysterious voice again.");
         quote('???', `${p.name}... ${p.name}, head for the point on your map marked on your Sheikah slate, it will show you the way.`)
-        if (q(`After walking a while ${p.name} finds an axe, should they pick it up?`)) {
+        if (q(`After walking a while you find an axe, pick it up?`)) {
             drop("Woodcutters Axe", 3, "weapon");
         }
-        alert(p.name + " get close to the point and see a structure in the distance but there is a group of enemy's");
+        alert("You get close to the point and see a structure in the distance but there is a group of enemy's");
         /*----------------------------------------------------------------------*/
         battle("Keese", 1, 1.25, 0.1, 0);
         if (ded) {
@@ -277,8 +272,8 @@ function game() {
         drop("Hylian Armor", 2, "armor");
         drop("heal", 5, "heal");
         /*----------------------------------------------------------------------*/
-        alert(`After clearing the group of enemys ${p.name} finds a small structure with a place to insert their Sheikah Slate.`);
-        alert(p.name + " inserts their Sheikah Slate and the structure starts rising into a great tower.");
+        alert(`After clearing the group of enemys you find a small structure with a place to insert your Sheikah Slate.`);
+        alert("You insert their Sheikah Slate and the structure starts rising into a great tower.");
         alert("-- GREAT TOWER --");
         quote('???', `${p.name}... ${p.name}... ${p.name}, this is the great tower. over there you can see Hyrule Castle.`);
         quote('???', "My Name is Princess Zelda.");
@@ -286,41 +281,85 @@ function game() {
         quote('Zelda', "Go find Impa in Kakariko Village.");
         quote('Zelda', "She will help you find and destroy Ganon");
         quote('Zelda', `${p.name}, ... The fate of Hyrule rests within your hands.`);
-        alert(`An old man aproches ${p.name}`);
+        alert(`An old man aproches you`);
         quote('Old Man', "Oh... Hello there");
         quote('Old Man', "What brings you here?");
-        alert(`${p.name} explains to the man that they just woke up and don't know what happening.`);
+        quote(p.name, "I just woke up... I dont really know what's happening.")
         quote('Old Man', "Did you... by any chance here a voice?");
-        alert(`${p.name} explains that they heard a voice and says it is from "Princess Zelda"`);
+        quote(p.name, 'Yes. It was from someone called "Princess Zelda", telling me to save Hyrule')
         quote('Old Man', "Ahhh. now i understand... in that case, you might want to make your way off of this plateu");
-        alert(`${p.name} shakes their head in agreement`)
+        alert('You shake your head in agreement')
         quote('Old Man', "I have a deal for you, you defeat this lynel over there that has been bothering me and i will give you this paraglider.")
-        var c5 = prompt("Take the old mans deal and defeat the lynel (1) or try to steal the paraglider form him (2)");
+        var c5 = prompt("Do you take the old mans deal and defeat the lynel (1) or try to steal the paraglider form him (2)");
         if (c5 == "1") {
             alert("You walk over to the lynel and engage in battle");
             battle("Red Lynel", 45, 3, 2.5, 0);
             if (ded) {
                 return "";
-            }
+            };
             drop("Lynel Sword", 5, "weapon");
             alert('The old man calls you over to join him');
-            alert(`''Aha! I see that you have taken that Lynels weapon, you could use that to protect yourself''`);
-            alert(`''Here, you deserve this paraglider.''`);
-            alert(`''I will watch over you, take good care of yourself''`);
+            quote('Old Man', "Aha! I see that you have taken that Lynels weapon, you could use that to protect yourself");
+            quote('Old Man', `Here, ${p.name}, you deserve my paraglider`);
         }
         if (c5 == "2") {
-            alert("You attempt to steal the paraglider from the man")
-            battle("Old Man", 50, 4, 1.9, 0)
+            alert("You attempt to steal the paraglider from the man");
+            battle("Old Man", 50, 4, 1.9, 0);
             if (ded) {
                 return "";
-            }
-            alert(`''heh, you have defeated me. I now realize that you are much stronger than Me.''`)
-            alert(`''Here, you deserve this paraglider, you can also use my cane to defend yourself.''`)
-            alert(`''I will watch over you, take good care of yourself''`)
-            drop("Old Cane", 4.5, "weapon")
-        }
-
+            };
+            quote('Old Man', "Heh, you have defeated me. I now realize that you are much stronger than I.");
+            alert(`''Here, you deserve this paraglider, you can also use my cane to defend yourself.''`);
+            drop("Old Cane", 4.5, "weapon");
+        };
+        quote('Old Man', "I will watch over you, take good care of yourself");
     } else {
         alert("You decide to sit there, unsure of what to do. After a while you start feeling hungry, you then fall asleep and never awake.\n\nGAME OVER");
-    }
+    };
 }
+/*
+Document Anylasess
+Doc A
+The Epen Museum - university of pensyvania
+author not precent in ancient greece
+secondary source
+Reliable because well known universityy
+Key words
+mountainis
+islands
+watercity states
+maritime
+coastlines
+peninsula
+harbors
+----
+Doc B
+Hellsanius - was present during time period
+First hand source
+translation issue?
+different language
+primary source can get it wrong
+bias
+didnt see it all
+key words
+states
+harbor
+islands
+beach
+mountains
+salt
+
+Similaritys:
+talk about geogryaphy, mountains, water, beaches, islands
+using the ocean to their advantage
+adapting to their enviorment
+document a about government, political devision
+document a talking about terrain and general idea
+document b talking about location of civilizations and etcetera
+document a more of birds eye veiw (more genereal)
+document b alot more specific
+
+
+
+
+*/
